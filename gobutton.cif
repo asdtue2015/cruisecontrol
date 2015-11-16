@@ -1,0 +1,35 @@
+svgfile "car.svg";
+
+plant button:
+  uncontrollable u_pushed, u_released;
+
+  location Released:
+    initial; marked;
+    edge u_pushed goto Pushed;
+
+  location Pushed:
+    edge u_released goto Released;
+
+  svgout id "gobutton" attr "height" value if Pushed: 12 else 36 end;
+end
+
+plant lamp:
+  controllable c_on, c_off;
+
+  location Off:
+    initial; marked;
+    edge c_on goto On;
+
+  location On:
+    edge c_off goto Off;
+
+  svgout id "indicator" attr "fill" value if On: "yellow" else "silver" end;
+end
+
+supervisor controller:
+  location:
+    initial;
+    edge lamp.c_on when button.Pushed;
+    edge lamp.c_off when button.Released;
+end
+

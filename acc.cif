@@ -1,0 +1,30 @@
+svgfile "car.svg";
+
+import "gobutton.cif";
+
+svgin id "gobutton" event if button.Released: button.u_pushed
+                          elif button.Pushed:  button.u_released
+                          end;
+
+
+automaton car_red:
+    cont x=0.0;
+
+    location stop:
+       initial;
+       equation x'=0.0;
+       edge button.u_pushed goto drive;
+
+
+
+ location drive:
+
+     equation x'=0.8;
+     edge button.u_released goto stop;
+
+
+
+    svgout id "car_red" attr "transform" value fmt("translate(%s,0)", 50 *  x);
+end
+
+

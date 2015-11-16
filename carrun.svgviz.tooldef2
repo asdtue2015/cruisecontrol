@@ -1,0 +1,12 @@
+from "lib:cif3" import *;
+
+cif3sim(
+    "acc.cif",
+    "-m warning",
+    "-t 200",
+    "-i svg",
+    "-a first",
+    "--frame-rate=50",
+    "--speed=2.0",
+    "--option-dialog=yes",
+);
