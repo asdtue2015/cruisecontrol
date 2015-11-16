@@ -1,5 +1,9 @@
 svgfile "car.svg";
 
+svgin id "gobutton" event if button.Released: button.u_pushed
+                          elif button.Pushed:  button.u_released
+                          end;
+
 plant button:
   uncontrollable u_pushed, u_released;
 

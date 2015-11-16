@@ -2,9 +2,7 @@ svgfile "car.svg";
 
 import "gobutton.cif";
 
-svgin id "gobutton" event if button.Released: button.u_pushed
-                          elif button.Pushed:  button.u_released
-                          end;
+
 
 const real g     = 9.81;          // gravity
 const real mass  = 1200;           // mass in kg
