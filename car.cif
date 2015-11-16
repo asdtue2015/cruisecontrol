@@ -1,37 +1,42 @@
-svgfile "bouncing_ball.svg";
+svgfile "car.svg";
+
+import "gobutton.cif";
+
+svgin id "gobutton" event if button.Released: button.u_pushed
+                          elif button.Pushed:  button.u_released
+                          end;
 
 const real g     = 9.81;          // gravity
-const real m     = 1.0;           // mass
-const real MAX_Y = 20.0;          // maximum/initial vertical position of ball
-const real V_X   = 18.0;          // constant horizontal velocity
-const real R     = 0.75;          // speed reduction on bounce
-const real E     = 0.1;           // epsilon distance (stop height)
+const real mass  = 1200;           // mass in kg
+const real throttle = 0.3;         // fake constant throttle for now - value in [0;1]
 
-automaton bouncing_ball:
-  cont x = 0.0,
-       y = MAX_Y,
-       v = 0.0;
 
-  equation y' = v;
-  equation x' = V_X;
+automaton car:
+  cont x = 0.0;         // position on the road
+  cont v = 0.0;         // speed of the car
 
-  location fall:
+
+  equation x' = v;
+  alg real Fr = 10 + 10 * x' + 10 * x' * x';        // Friction (including road and air)
+  alg real Pr = 100 * throttle;                     // Propulsion: motor commanded through throttle
+
+  location stop:
     initial;
-    equation v' = -m * g;
-    edge when y <= 0 do v := -R * v goto rise;
+    equation v' = (1 / mass) *  Fr;
+   // edge when button.Pushed goto accel;
 
-  location rise:
-    equation v' = -m * g;
-    edge when v <= 0, y >= E goto fall;
-    edge when v <= 0, y <  E goto done;
+ // location accel:
+  //  equation v' = (1 / mass) * ( Pr - Fr );
+   // edge  when button.Released goto stop;
 
-  location done:
-    equation v' = 0.0;
+  svgout id "car_red" attr "transform" value fmt("translate(%s,0)", 50 *  x);
 end
 
-svgout id "time" text value fmt("Time: %.1f", time);
+/* svgout id "time" text value fmt("Time: %.1f", time);
 
 svgout id "ball_grp" attr "transform"
 value fmt("translate(%s,%s)",
           bouncing_ball.x,
           scale(bouncing_ball.y, 0, MAX_Y, 0, -200));
+       */
+

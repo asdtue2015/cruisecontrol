@@ -24,7 +24,7 @@ automaton car_red:
 
 
 
-    svgout id "car_red" attr "transform" value fmt("translate(%s,0)", 50 *  x);
+  //  svgout id "car_red" attr "transform" value fmt("translate(%s,0)", 50 *  x);
 end
 
 
