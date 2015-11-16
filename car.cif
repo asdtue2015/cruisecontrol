@@ -16,28 +16,22 @@ automaton car:
   cont v = 0.0;         // speed of the car
 
 
-  equation x' = v;
-  alg real Fr = 10 + 10 * x' + 10 * x' * x';        // Friction (including road and air)
+  equation x' = v;      // two separate variables to have two derivatives
+
+  alg real Fr =  100 * v + 10 * v * v;        // Friction (including road and air)
   alg real Pr = 100 * throttle;                     // Propulsion: motor commanded through throttle
 
-  location stop:
+  location stop:            //  motor is off - initial state
     initial;
-    equation v' = (1 / mass) * ( -Fr);
-  //  equation when v>0, v' = (1 / mass) * ( -Fr);
-   // edge when button.Pushed goto accel;
+    equation v' = (1 / mass) * ( -Fr);              // F = ma
+    edge when button.Pushed goto accel;
 
- // location accel:
-  //  equation v' = (1 / mass) * ( Pr - Fr );
-   // edge  when button.Released goto stop;
+  location accel:           //  motor is on
+    equation v' = (1 / mass) * ( Pr - Fr );        // F = ma
+    edge  when button.Released goto stop;
 
   svgout id "car_red" attr "transform" value fmt("translate(%s,0)", 50 *  x);
+
 end
 
-/* svgout id "time" text value fmt("Time: %.1f", time);
-
-svgout id "ball_grp" attr "transform"
-value fmt("translate(%s,%s)",
-          bouncing_ball.x,
-          scale(bouncing_ball.y, 0, MAX_Y, 0, -200));
-       */
 
