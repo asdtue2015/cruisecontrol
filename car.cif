@@ -22,7 +22,8 @@ automaton car:
 
   location stop:
     initial;
-    equation v' = (1 / mass) *  Fr;
+    equation v' = (1 / mass) * ( -Fr);
+  //  equation when v>0, v' = (1 / mass) * ( -Fr);
    // edge when button.Pushed goto accel;
 
  // location accel:
