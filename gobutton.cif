@@ -16,22 +16,26 @@ plant button:
 
   svgout id "gobutton" attr "height" value if Pushed: 12 else 36 end;
 end
-svgin id "gobutton2" event if button2.Released: button2.u_pushed
-                          elif button2.Pushed:  button2.u_released
+
+svgin id "ccbutton" event if ccbutton.Released: ccbutton.u_pushed
+                          elif ccbutton.Pushed:  ccbutton.u_released
                           end;
+plant ccbutton:
+    uncontrollable u_pushed,u_released;
 
-plant button2:
-  uncontrollable u_pushed, u_released;
+    location Released:
+        initial;marked;
+        edge u_pushed goto Pushed;
 
-  location Released:
-    initial; marked;
-    edge u_pushed goto Pushed;
+    location Pushed:
+        edge u_released goto Released;
 
-  location Pushed:
-    edge u_released goto Released;
+    svgout id "ccbutton" attr "fill" value if Pushed: "green" else "silver" end;
 
-  svgout id "gobutton2" attr "height" value if Pushed: 12 else 36 end;
 end
+
+
+
 plant lamp:
   controllable c_on, c_off;
 
