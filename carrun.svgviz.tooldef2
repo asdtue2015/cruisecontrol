@@ -1,7 +1,7 @@
 from "lib:cif3" import *;
 
 cif3sim(
-    "car.cif",
+    "model.cif",
     "-m warning",
     "-t 200",
     "-i svg",
@@ -9,4 +9,7 @@ cif3sim(
     "--frame-rate=50",
     "--speed=2.0",
     "--option-dialog=no",
+    "--plotviz=1",
+    "--plotviz-range=inf",
+    "--plotviz-filter=car.v",
 );

@@ -1,0 +1,8 @@
+svgfile "car.svg";
+
+import "gobutton.cif";
+import "pid.cif";
+import "car.cif";
+
+
+ pid_speed: pid(car.v, 50.0/3.6 , 20, 2);

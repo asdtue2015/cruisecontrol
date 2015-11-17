@@ -1,43 +1,33 @@
 svgfile "car.svg";
 
 import "gobutton.cif";
-
+import "pid.cif";
+import "model.cif";
 
 
 const real g     = 9.81;          // gravity
-<<<<<<< HEAD
 const real mass  = 1200;           // mass in kg
-const real throttle = 0.3;         // fake constant throttle for now - value in [0;1]
+const real throttle = 1;         // fake constant throttle for now - value in [0;1]
 const real friction_lin = 100;      // friction prop. to speed (N / (m/s))
-const real friction_sq = 10;       // friction quadratic to speed (N / (m/s)^2)
-=======
-const real mass  = 100;           // mass in kg
-const real throttle = 0.5;         // fake constant throttle for now - value in [0;1]
+const real friction_sq = 3;       // friction quadratic to speed (N / (m/s)^2)
+const real Fmotor = 10000;          // motor's max force at full throttle
 
->>>>>>> origin/master
 
 automaton car:
   cont x = 0.0;         // position on the road
   cont v = 0.0;         // speed of the car
 
-svgout id "speed" text value fmt("speed: %.2f", v);
+svgout id "speed" text value fmt("speed: %.2f (km/h)", v * 3.6);
   equation x' = v;      // two separate variables to have two derivatives
 
   alg real Fr =  friction_lin * v + friction_sq * v * v;        // Friction (including road and air)
-  alg real Pr = 100 * throttle;                     // Propulsion: motor commanded through throttle
+  alg real Pr = Fmotor * pid_speed.output;                     // Propulsion: motor commanded through throttle
 
-  location stop:            //  motor is off - initial state
+  location vanilla:            //  motor is off - initial state
     initial;
-    equation v' = (1 / mass) * ( -Fr);              // F = ma
-    edge when button.Pushed goto accel;
+    equation v' = (1 / mass) * ( Pr - Fr );              // F = ma
 
-  location accel:           //  motor is on
-    equation v' = (1 / mass) * ( Pr - Fr );        // F = ma
-    edge  when button.Released goto stop;
-    edge  when button2.Pushed goto cc;
-  location cc:  //cruise control on
-    equation v' =0;
-    edge  when button2.Released goto accel;
+
   svgout id "car_red" attr "transform" value fmt("translate(%s,0)", 50 *  x);
 
 end
