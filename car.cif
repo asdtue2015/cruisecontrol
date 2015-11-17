@@ -6,33 +6,49 @@ import "gobutton.cif";
 
 const real g     = 9.81;          // gravity
 const real mass  = 100;           // mass in kg
-const real throttle = 0.5;         // fake constant throttle for now - value in [0;1]
-
-
+//throttle = 0.0;         // fake constant throttle for now - value in [0;1]
+event u_pushed3;// event increment the throttle
+event u_pushed4;// event decrement the throttle
+event u_brake;
 automaton car:
   cont x = 0.0;         // position on the road
   cont v = 0.0;         // speed of the car
 
-svgout id "speed" text value fmt("speed: %.2f", v);
+  disc real throttle = 0.0;         // discrete throttle that gets incremented or decremented by +/- 0.1
+svgout id "speed" text value fmt("speed: %.2f", v*3.6);
   equation x' = v;      // two separate variables to have two derivatives
+svgout id "acceleration" text value fmt("acceleration: %.2f", v');
 
-  alg real Fr =  100 * v + 10 * v * v;        // Friction (including road and air)
-  alg real Pr = 100 * throttle;                     // Propulsion: motor commanded through throttle
+   alg real Pr = if cc:Fr // cruise control must have constant velocity so constant accel so pr should be equal to fr
+                    else 10000 * throttle
+                    end; // Propulsion: motor commanded through throttle
+   alg real Fr =  100 * v + 10 * v * v;// Friction (including road and air)
 
   location stop:            //  motor is off - initial state
     initial;
-    equation v' = (1 / mass) * ( -Fr);              // F = ma
-    edge when button.Pushed goto accel;
-
+    equation v' = (1 / mass) * (-Fr);              // F = ma
+    edge when button.Pushed goto accel; // engine on
+    edge  u_pushed3 goto accel;
   location accel:           //  motor is on
-    equation v' = (1 / mass) * ( Pr - Fr );        // F = ma
-    edge  when button.Released goto stop;
-    edge  when button2.Pushed goto cc;
-  location cc:  //cruise control on
-    equation v' =0;
-    edge  when button2.Released goto accel;
-  svgout id "car_red" attr "transform" value fmt("translate(%s,0)", 50 *  x);
-
+  edge  u_pushed3 do throttle := throttle + 0.1;// increment throttle
+  edge  u_pushed4 do throttle := throttle - 0.1;// decrement throttle
+    equation v' = (1 / mass) * ( Pr - Fr );        // F  = ma   forces with motion - opposing forces = mass* accel
+    edge  when button.Released do throttle :=0 goto stop; // on / off button
+    edge  when button2.Pushed and v*3.6 >30 goto cc; // cruise control button pressed and speed more than 30
+    edge u_brake do throttle :=0 goto stop;// braking so should stop
+  location cc:  //cruise control on state
+    equation v' =0;// v' which acceleration should be zero in cruise control since we want to maintain constant speed
+    edge u_brake do throttle :=0 goto stop;// braking so should stop
+    edge  when button.Released do throttle :=0 goto stop; // engine off so should stop
+    edge  when button2.Released goto accel;// cruise control is set to be off
+    edge  when v*3.6 <25 goto accel; // cruise control disabled if speed is less than 25
+  svgout id "car_red" attr "transform" value fmt("translate(%s,0)", 50 *  x);// car movement display
+svgin id "gobutton3" event u_pushed3; // event for incrementing the throttle
+svgin id "gobutton4" event u_pushed4; // event for decrementing the throttle
+svgout id "pr" text value fmt("pr: %.2f", Pr);// display the driving force
+svgout id "fr" text value fmt("fr: %.2f", Fr); // display the opposing forces
+svgout id "throttle" text value fmt("throttle: %.2f", throttle); // display the throttle
+svgin id "brake" event u_brake; // brake event
 end
 
 

@@ -32,6 +32,7 @@ plant button2:
 
   svgout id "gobutton2" attr "height" value if Pushed: 12 else 36 end;
 end
+
 plant lamp:
   controllable c_on, c_off;
 

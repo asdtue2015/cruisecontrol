@@ -47,13 +47,13 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.08"
-     inkscape:cx="269.72789"
-     inkscape:cy="301.13619"
+     inkscape:cx="460.26318"
+     inkscape:cy="259.71833"
      inkscape:document-units="px"
      inkscape:current-layer="svg2"
      showgrid="false"
-     inkscape:window-width="1200"
-     inkscape:window-height="1849"
+     inkscape:window-width="1536"
+     inkscape:window-height="803"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -171,4 +171,119 @@
        id="tspan2391"
        x="251.14685"
        y="128.77547">speed: 0.0</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:Sans;-inkscape-font-specification:Sans;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+     x="375.40524"
+     y="126.50578"
+     id="acceleration"
+     sodipodi:linespacing="125%"
+     inkscape:label="#acceleration"><tspan
+       sodipodi:role="line"
+       id="tspan2391-4"
+       x="375.40524"
+       y="126.50578">acceleration: 0.0</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:Sans;-inkscape-font-specification:Sans;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+     x="53.786541"
+     y="181.14478"
+     id="speed-8"
+     sodipodi:linespacing="125%"
+     inkscape:label="#speed"><tspan
+       sodipodi:role="line"
+       id="tspan2391-9"
+       x="53.786541"
+       y="181.14478">+</tspan></text>
+  <rect
+     style="fill:#ff0ff0"
+     id="gobutton3"
+     width="70.370369"
+     height="30"
+     x="23.740395"
+     y="185.24623" />
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 5.52596,216.42269 117.563,215.49677"
+     id="path3404-6"
+     inkscape:connector-curvature="0" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:Sans;-inkscape-font-specification:Sans;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+     x="191.27954"
+     y="179.48883"
+     id="speed-8-4"
+     sodipodi:linespacing="125%"
+     inkscape:label="#speed"><tspan
+       sodipodi:role="line"
+       id="tspan2391-9-0"
+       x="191.27954"
+       y="179.48883">-</tspan></text>
+  <rect
+     style="fill:#000ff0"
+     id="gobutton4"
+     width="70.370369"
+     height="30"
+     x="161.23338"
+     y="183.59029" />
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 143.01895,214.76675 112.03703,-0.92592"
+     id="path3404-6-2"
+     inkscape:connector-curvature="0" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:Sans;-inkscape-font-specification:Sans;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+     x="514.29413"
+     y="82.987267"
+     id="pr"
+     sodipodi:linespacing="125%"
+     inkscape:label="#pr"><tspan
+       sodipodi:role="line"
+       id="tspan2391-8"
+       x="514.29413"
+       y="82.987267">pr: 0.0</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:Sans;-inkscape-font-specification:Sans;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+     x="665.22003"
+     y="112.6169"
+     id="fr"
+     sodipodi:linespacing="125%"
+     inkscape:label="#fr"><tspan
+       sodipodi:role="line"
+       id="tspan2391-0"
+       x="665.22003"
+       y="112.6169">fr: 0.0</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:Sans;-inkscape-font-specification:Sans;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+     x="590.22003"
+     y="40.394676"
+     id="throttle"
+     sodipodi:linespacing="125%"
+     inkscape:label="#throttle"><tspan
+       sodipodi:role="line"
+       id="tspan2391-6"
+       x="590.22003"
+       y="40.394676">throttle: 0.0</tspan></text>
+  <rect
+     style="fill:#ff0ff0"
+     id="brake"
+     width="70.370369"
+     height="30"
+     x="304.62964"
+     y="177.40741" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:Sans;-inkscape-font-specification:Sans;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+     x="314.29413"
+     y="222.80209"
+     id="speed-6"
+     sodipodi:linespacing="125%"
+     inkscape:label="#speed"><tspan
+       sodipodi:role="line"
+       id="tspan2391-7"
+       x="314.29413"
+       y="222.80209">Brake</tspan></text>
 </svg>
