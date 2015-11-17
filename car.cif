@@ -7,7 +7,8 @@ import "gobutton.cif";
 const real g     = 9.81;          // gravity
 const real mass  = 1200;           // mass in kg
 const real throttle = 0.3;         // fake constant throttle for now - value in [0;1]
-
+const real friction_lin = 100;      // friction prop. to speed (N / (m/s))
+const real friction_sq = 10;       // friction quadratic to speed (N / (m/s)^2)
 
 automaton car:
   cont x = 0.0;         // position on the road
@@ -16,7 +17,7 @@ automaton car:
 
   equation x' = v;      // two separate variables to have two derivatives
 
-  alg real Fr =  100 * v + 10 * v * v;        // Friction (including road and air)
+  alg real Fr =  friction_lin * v + friction_sq * v * v;        // Friction (including road and air)
   alg real Pr = 100 * throttle;                     // Propulsion: motor commanded through throttle
 
   location stop:            //  motor is off - initial state
