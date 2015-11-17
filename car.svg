@@ -47,14 +47,14 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.08"
-     inkscape:cx="387.89274"
+     inkscape:cx="269.72789"
      inkscape:cy="301.13619"
      inkscape:document-units="px"
      inkscape:current-layer="svg2"
      showgrid="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1057"
-     inkscape:window-x="1912"
+     inkscape:window-width="1200"
+     inkscape:window-height="1849"
+     inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
      showguides="true"
@@ -147,4 +147,28 @@
        d="m 100,298.88889 c 1.54321,-0.61729 3.08642,-1.23457 4.62963,-1.85185 0.30864,-0.30864 0.53552,-0.73073 0.92592,-0.92593 0.27606,-0.13803 0.63312,0.0976 0.92593,0 0.65473,-0.21824 1.19712,-0.70768 1.85185,-0.92592 0.2928,-0.0976 0.63312,0.0976 0.92593,0 6.70686,-2.23563 -1.45983,0.26694 2.77777,-1.85186 0.27606,-0.13803 0.64987,0.13803 0.92593,0 0.3904,-0.1952 0.53552,-0.73072 0.92592,-0.92592 0.27606,-0.13803 0.70769,0.21824 0.92593,0 0.43649,-0.43649 -0.27606,-1.29974 0,-1.85185 1.10861,-2.21722 1.85185,0.58351 1.85185,-1.85186"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
   </g>
+  <rect
+     style="fill:#fff000"
+     id="gobutton2"
+     width="70.370369"
+     height="30"
+     x="372.68518"
+     y="60.212967" />
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 354.16667,92.620376 112.03704,-0.92592"
+     id="path3404-3"
+     inkscape:connector-curvature="0" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:Sans;-inkscape-font-specification:Sans;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+     x="251.14685"
+     y="128.77547"
+     id="speed"
+     sodipodi:linespacing="125%"
+     inkscape:label="#speed"><tspan
+       sodipodi:role="line"
+       id="tspan2391"
+       x="251.14685"
+       y="128.77547">speed: 0.0</tspan></text>
 </svg>
