@@ -1,6 +1,4 @@
-//input real V_Measure;
-//input real V_Target;
-
+// Actually PI controller only
 // Kpc: Master set value (critical P gain)
 
 automaton def pid(alg real V_Measure; alg real V_Target; alg real Kpc; alg real ARW_limit):
@@ -19,15 +17,14 @@ automaton def pid(alg real V_Measure; alg real V_Target; alg real Kpc; alg real 
 
     equation PID_Integrator' = error;
 
-
-    alg real integral = if Ki * PID_Integrator <= ARW_limit : (if Ki * PID_Integrator >= -ARW_limit : Ki * PID_Integrator else -ARW_limit end) else ARW_limit end; // Anti Reset Windup threshold
+    alg real integral = Ki * PID_Integrator;
     alg real proportional = Kp * PID_Integrator';
 
 
 
     alg real output = if reaction <= 1 : (if reaction >= 0 : reaction else 0 end) else 1 end; // Constrain to [0;1]
 
-
+    // Locations are implementations of Anti Reset Windup: switch Integrator only when close to the target
     location big_error:
        initial;
        equation reaction = proportional;
