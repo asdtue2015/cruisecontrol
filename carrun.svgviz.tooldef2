@@ -1,7 +1,7 @@
 from "lib:cif3" import *;
 
 cif3sim(
-    "car.cif",
+    "model.cif",
     "-m warning",
     "-t 200",
     "-i svg",
