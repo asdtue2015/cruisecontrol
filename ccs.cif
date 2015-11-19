@@ -1,0 +1,29 @@
+
+import "car.cif";
+import "gobutton.cif";
+//automaton def ccs (event u_tsplus; event u_tsminus):
+
+automaton def ccs ():
+
+cont ts= 50;
+equation ts'=0;
+cont state=0;
+equation state'=0;
+
+location on:
+    edge when button.Released or car.v*3.6<25 do state:=0 goto off;
+    edge u_brake do state:=0 goto off;
+    edge  u_pushed3 do state:= 0 goto off;
+    edge  u_pushed4 do state:=0 goto off;
+    edge u_ccpushed do state:=0 goto off;
+    edge  u_tsplus do ts:=ts+5;                //set target speed
+    edge  u_tsminus do ts:=ts-5;
+location off:
+    initial;
+    edge u_ccpushed when car.v*3.6 >30 do state:= 1 goto on;
+
+
+svgin id "tsplus" event u_tsplus;
+svgin id "tsminus" event u_tsminus;
+
+end
