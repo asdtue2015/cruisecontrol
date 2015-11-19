@@ -1,5 +1,6 @@
 // Actually PI controller only
 // Kpc: Master set value (critical P gain)
+import "ccs.cif";
 
 automaton def pid(alg real Kpc; alg real ARW_limit):
 
@@ -13,8 +14,8 @@ automaton def pid(alg real Kpc; alg real ARW_limit):
     cont t = 0.0;
     equation t'=1;
 
-    input bool CCS_state;
-    input real V_Target;
+    alg bool CSS_state = css.state;
+    alg real V_Target = ccs.ts;
     input real V_Measure;
 
 

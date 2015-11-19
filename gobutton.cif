@@ -16,7 +16,7 @@ plant button:
 
   svgout id "gobutton" attr "height" value if Pushed: 12 else 36 end;
 end
-
+/*
 svgin id "ccbutton" event if ccbutton.Released: ccbutton.u_pushed
                           elif ccbutton.Pushed:  ccbutton.u_released
                           end;
@@ -34,7 +34,7 @@ plant ccbutton:
 
 end
 
-
+*/
 
 plant lamp:
   controllable c_on, c_off;

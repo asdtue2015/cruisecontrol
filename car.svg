@@ -47,13 +47,13 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.56220848"
-     inkscape:cx="552.16935"
+     inkscape:cx="570.89113"
      inkscape:cy="569.14313"
      inkscape:document-units="px"
      inkscape:current-layer="svg2"
      showgrid="false"
      inkscape:window-width="1920"
-     inkscape:window-height="1057"
+     inkscape:window-height="1009"
      inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -225,25 +225,6 @@
      d="M 698.03317,78.838969 810.0702,77.913049"
      id="path3404-6-2"
      inkscape:connector-curvature="0" />
-  <rect
-     style="fill:#ff0ff0"
-     id="brake"
-     width="70.370369"
-     height="30"
-     x="859.64386"
-     y="41.479633" />
-  <text
-     xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:Sans;-inkscape-font-specification:Sans;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
-     x="869.30835"
-     y="86.874321"
-     id="speed-6"
-     sodipodi:linespacing="125%"
-     inkscape:label="#speed"><tspan
-       sodipodi:role="line"
-       id="tspan2391-7"
-       x="869.30835"
-       y="86.874321">Brake</tspan></text>
   <text
      xml:space="preserve"
      style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:125%;font-family:Sans;-inkscape-font-specification:Sans;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
@@ -338,7 +319,7 @@
   </g>
   <g
      transform="translate(-110.86839,70.967248)"
-     id="brake-4">
+     id="brake">
     <rect
        y="86.35659"
        x="390.69766"
@@ -370,7 +351,7 @@
        x="426.46036"
        y="193.10388">Error:0.0</tspan></text>
   <g
-     id="car_red-2"
+     id="car_red"
      transform="translate(27.28174,12.615744)">
     <g
        id="g3399">
@@ -442,7 +423,7 @@
       <path
          sodipodi:type="spiral"
          style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         id="accsmoke-1"
+         id="accsmoke"
          sodipodi:cx="-19.992977"
          sodipodi:cy="304.65985"
          sodipodi:expansion="1"

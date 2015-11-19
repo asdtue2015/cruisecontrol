@@ -1,20 +1,25 @@
 
 import "car.cif";
 import "gobutton.cif";
+svgfile "car.svg";
 //automaton def ccs (event u_tsplus; event u_tsminus):
+uncontrollable u_tsplus,u_tsminus;
+event u_ccpushed;
 
-automaton def ccs ():
+automaton ccs:
 
 cont ts= 50;
 equation ts'=0;
 cont state=0;
 equation state'=0;
+monitor u_tsplus,u_tsminus;
+
 
 location on:
     edge when button.Released or car.v*3.6<25 do state:=0 goto off;
     edge u_brake do state:=0 goto off;
-    edge  u_pushed3 do state:= 0 goto off;
-    edge  u_pushed4 do state:=0 goto off;
+    edge u_pedthrottleplus do state:= 0 goto off;
+    edge  u_pedthrottleminus do state:=0 goto off;
     edge u_ccpushed do state:=0 goto off;
     edge  u_tsplus do ts:=ts+5;                //set target speed
     edge  u_tsminus do ts:=ts-5;
@@ -25,5 +30,5 @@ location off:
 
 svgin id "tsplus" event u_tsplus;
 svgin id "tsminus" event u_tsminus;
-
+svgin id "ccbutton" event u_ccpushed;
 end
