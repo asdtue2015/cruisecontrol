@@ -1,9 +1,7 @@
-//input real V_Measure;
-//input real V_Target;
-
+// Actually PI controller only
 // Kpc: Master set value (critical P gain)
 
-automaton def pid(alg real V_Measure; alg real V_Target; alg real Kpc; alg real ARW_limit):
+automaton def pid(alg real Kpc; alg real ARW_limit):
 
     // Ziegler-Nichols values       // FIXME 26km/h in 4 s  - no pure delay -> calculate ZN
     alg real Kp = 0.6 * Kpc;
@@ -15,29 +13,38 @@ automaton def pid(alg real V_Measure; alg real V_Target; alg real Kpc; alg real 
     cont t = 0.0;
     equation t'=1;
 
+    input bool CCS_state;
+    input real V_Target;
+    input real V_Measure;
+
+
     alg real error = V_Target - V_Measure;
 
     equation PID_Integrator' = error;
 
-
-    alg real integral = if Ki * PID_Integrator <= ARW_limit : (if Ki * PID_Integrator >= -ARW_limit : Ki * PID_Integrator else -ARW_limit end) else ARW_limit end; // Anti Reset Windup threshold
+    alg real integral = Ki * PID_Integrator;
     alg real proportional = Kp * PID_Integrator';
-
-
 
     alg real output = if reaction <= 1 : (if reaction >= 0 : reaction else 0 end) else 1 end; // Constrain to [0;1]
 
+    location idle:
+        initial;
+        equation reaction = 0;
 
+        edge when CCS_state do PID_Integrator := 0.0, t:=0 goto big_error; // CCS is turned on -> enable PID output and assume error is big
+
+    // Locations are implementations of Anti Reset Windup: switch Integrator only when close to the target
     location big_error:
-       initial;
        equation reaction = proportional;
 
+       edge when CCS_state = false goto idle;   // CCS is turned off -> disable PID output
        edge when error < ARW_limit, t>0.1 do PID_Integrator := 0.0, t:=0 goto small_error;
        edge when error > -ARW_limit, t>0.1 do PID_Integrator := 0.0, t:=0 goto small_error;
 
     location small_error:
        equation reaction = integral + proportional;
 
+       edge when CCS_state = false goto idle;   // CCS is turned off -> disable PID output
        edge when error > ARW_limit, t>0.1 do PID_Integrator := 0.0, t:=0 goto big_error;
        edge when error < -ARW_limit, t>0.1 do PID_Integrator := 0.0, t:=0 goto big_error;
 

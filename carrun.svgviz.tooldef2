@@ -9,4 +9,8 @@ cif3sim(
     "--frame-rate=50",
     "--speed=2.0",
     "--option-dialog=no",
+    "--plotviz=0",
+    "--plotviz-range=inf",
+    "--plotviz-filter=pid_speed.error,pid_speed.output,pid_speed.reaction,pid_speed.proportional,pid_speed.integral",
+    "--plotviz-mode=postponed",
 );
