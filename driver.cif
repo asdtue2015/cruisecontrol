@@ -1,0 +1,30 @@
+svgfile "car.svg";
+
+
+
+uncontrollable u_pedthrottleplus,u_pedthrottleminus,u_brake;
+
+
+
+automaton driver:
+    cont pthrottle=0.0;
+    cont breaking = 0;
+
+    equation pthrottle'=0;
+
+    equation breaking'=0;
+
+    location drive:
+    initial;
+    edge u_pedthrottleplus do pthrottle:=  if pthrottle < 1 : pthrottle+0.2 else pthrottle end,breaking:= 0;
+    edge u_pedthrottleminus  do pthrottle:= if pthrottle > 0 : pthrottle-0.2 else pthrottle end,breaking:= 0;
+
+    edge u_brake do breaking:= 1,pthrottle:= 0;
+
+
+    svgin id "pedtplus" event u_pedthrottleplus;
+    svgin id "pedtminus" event u_pedthrottleminus;
+    svgin id "brake" event u_brake;
+
+end
+

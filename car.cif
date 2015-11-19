@@ -1,84 +1,59 @@
 svgfile "car.svg";
 
-import "gobutton.cif";
-import "pid.cif";
-import "model.cif";
-
-
-uncontrollable u_tsplus,u_tsminus;
 
 const real g     = 9.81;          // gravity
 const real mass  = 1200;           // mass in kg
-//disc real throttle = 0.5;         // fake constant throttle for now - value in [0;1]
-const real friction_lin = 100;      // friction prop. to speed (N / (m/s))
+
+const real friction_lin = 200;      // friction prop. to speed (N / (m/s))
 const real friction_sq = 3;       // friction quadratic to speed (N / (m/s)^2)
 const real Fmotor = 10000;          // motor's max force at full throttle
-event u_pushed3;// event increment the throttle
-event u_pushed4;// event decrement the throttle
-event u_brake;
+const real BreakF=3000;
+
+const real rthrottle=0;
+
+
+import "gobutton.cif";
+import "driver.cif";
+
+
+
 
 
 automaton car:
-  monitor u_tsplus,u_tsminus;
-  cont x = 0.0;         // position on the road
-  cont v = 0.0;         // speed of the car
-  cont ts= 50;         // target speed
 
-disc real throttle = 0.0;         // fake constant throttle for now - value in [0;1]
-  equation x' = v;      // two separate variables to have two derivatives
-  equation ts'=0;       // target speed does not change by itself
+    cont x = 0.0;         // position on the road
+    cont v = 0.0;         // speed of the car
 
 
-  alg real Fr =  friction_lin * v + friction_sq * v * v;        // Friction (including road and air)
-  alg real Pr = Fmotor * (throttle + pid_speed.output);       // Propulsion: motor commanded through throttle
-  alg real err=v-ts;              //generate error from comparison
+    equation x' = v;      // two separate variables to have two derivatives
 
-  location stop:            //  motor is off - initial state
-    initial;
-    equation v' = (1 / mass) * ( -Fr);              // F = ma
-    edge when button.Pushed goto accel;
-    edge  u_pushed3 goto accel;
-  location accel:           //  motor is on
-    edge  u_pushed3 do throttle := throttle + 0.1;// increment throttle
-  edge  u_pushed4 do throttle := throttle - 0.1;// decrement throttle
-    equation v' = (1 / mass) * ( Pr - Fr );        // F = ma
-    edge  when button.Released do throttle:=0 goto stop;
-    edge  when ccbutton.Pushed and v*3.6 >30 goto ccon;
-    edge u_brake do throttle :=0 goto stop;// braking so should stop
+    alg real Fr =  friction_lin * v + friction_sq * v * v;        // Friction (including road and air)
+
+
+
+    location off:
+        initial;
+        equation v' = (1 / mass) * ( -Fr);              // F = ma
+        edge when button.Pushed goto on;
+
+
+
+    location on:
+
+
+        equation v' = if driver.breaking=0:  (1 / mass) * ( Fmotor*(driver.pthrottle+rthrottle) - Fr )
+                    elif driver.breaking=1 and v>0: -BreakF/mass
+                    else 0
+                    end;
     edge  when x>=125 do x:=-5 ;
+    edge when button.Released goto off;
 
 
 
-  location ccon:
+    svgout id "car_red" attr "transform" value fmt("translate(%s,0)", 20 *  x);
+    svgout id "time" text value fmt("Time: %.2f", time);
+    svgout id "speed" text value fmt("speed: %.2f (km/h)", v * 3.6);
+    svgout id "accsmoke"    attr "display" value if v'>0: "inline" else "none" end;
 
-    equation v' = (1 / mass) * ( Pr - Fr );        // F = ma
-    edge when ccbutton.Released goto accel;
-    edge u_brake do throttle :=0 goto stop;// braking so should stop
-    edge  when button.Released do throttle :=0 goto stop; // engine off so should stop
-    edge  when v*3.6 <25 goto accel; // cruise control disabled if speed is less than 25
-    edge  u_pushed3 goto ccon;
-    edge  u_pushed4 goto ccon;
-    edge  u_tsplus do ts:=ts+5;                //set target speed
-    edge  u_tsminus do ts:=ts-5;
-    edge  when x>=125 do x:=-5 ;
-
-  svgin id "tsplus" event u_tsplus;
-  svgin id "tsminus" event u_tsminus;
-  svgout id "car_red" attr "transform" value fmt("translate(%s,0)", 20 *  x);
-  svgout id "time" text value fmt("Time: %.2f", time);
-  svgout id "speed" text value fmt("speed: %.2f (km/h)", v * 3.6);
-  svgout id "acceleration" text value fmt("acceleration: %.2f", v');
-  svgout id "ts" text value fmt("TargetS: %.2f", ts);
-  svgout id "hoi"    attr "display" value if x<= 16: "inline" else "none" end;
-  svgout id "bye"    attr "display" value if x>=100: "inline" else "none" end;
-  svgout id "accsmoke"    attr "display" value if v'>0: "inline" else "none" end;
-  svgin id "gobutton3" event u_pushed3; // event for incrementing the throttle
-  svgin id "gobutton4" event u_pushed4; // event for decrementing the throttle
-  svgout id "pr" text value fmt("pr: %.2f", Pr);// display the driving force
-  svgout id "fr" text value fmt("fr: %.2f", Fr); // display the opposing forces
-  svgout id "throttle" text value fmt("throttle: %.2f", throttle); // display the throttle
-  svgin id "brake" event u_brake; // brake event
 
 end
-
-
