@@ -1,5 +1,5 @@
 svgfile "car.svg";
-
+import "observer.cif";
 
 const real g     = 9.81;          // gravity
 const real mass  = 1200;           // mass in kg
@@ -15,6 +15,7 @@ import "driver.cif";
 import "ccs.cif";
 import "model.cif";
 
+uncontrollable turning_car_on, turning_car_off;
 
 automaton car:
 
@@ -31,7 +32,7 @@ automaton car:
     location off:
         initial;
         equation v' = (1 / mass) * ( -Fr);              // F = ma
-        edge when button.Pushed goto on;
+        edge turning_car_on when button.Pushed goto on;
 
 
 
@@ -43,7 +44,7 @@ automaton car:
                     else 0
                     end;
     edge  when x>=125 do x:=-5 ;
-    edge when button.Released goto off;
+    edge turning_car_off when button.Released goto off;
 
 
 

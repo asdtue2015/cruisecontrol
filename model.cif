@@ -3,6 +3,7 @@ svgfile "car.svg";
 import "gobutton.cif";
 import "pid.cif";
 import "car.cif";
+import "observer.cif";
 
 
 

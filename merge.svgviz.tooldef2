@@ -1,0 +1,17 @@
+from "lib:cif3" import *;
+
+cif3datasynth("abstract_scheme.cif --bdd-cache=10000 -o supervisor.cif -n sup");
+
+cif3merge("supervisor.cif model.cif -o merged.cif");
+
+cif3sim(
+    "merged.cif",
+    "--option-dialog=yes",
+
+    "-i svg",
+    "-a first",
+
+    "--frame-rate=50",
+    "--speed=1",
+    "--solver-root-maxchk=0.1",
+);

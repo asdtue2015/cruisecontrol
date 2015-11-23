@@ -1,0 +1,68 @@
+
+controllable ccs_turning_on, ccs_turning_off;
+
+plant ccs:
+    location on:
+        edge ccs_turning_off goto off;
+    location off:
+        initial; marked;
+        edge ccs_turning_on goto on;
+end
+
+requirement ccs_turning_on needs car.on;
+
+
+uncontrollable slowing_towards_zero, speeding_to_30, speeding_towards_250, slowing_towards_25;
+
+plant vehicle_speed:
+    location lower_than_25:
+        initial; marked;
+        edge speeding_to_30 goto between_25_and_30;
+
+    location between_25_and_30:
+        edge slowing_towards_zero goto lower_than_25;
+        edge speeding_towards_250 goto higher_than_30;
+
+    location higher_than_30:
+        edge slowing_towards_25 goto between_25_and_30;
+
+end
+
+requirement ccs_turning_on needs not vehicle_speed.lower_than_25;
+requirement slowing_towards_zero needs ccs.off;
+
+
+
+uncontrollable turning_car_on, turning_car_off;
+
+plant car:
+    location on:
+        edge turning_car_off goto off;
+
+    location off:
+        initial; marked;
+        edge turning_car_on goto on;
+
+end
+
+
+uncontrollable pid_error_is_big, pid_error_is_small;
+
+plant pid:
+    location idle:
+        initial; marked;
+        edge ccs_turning_on goto big_error;
+
+    location small_error:
+        edge ccs_turning_off goto idle;
+        edge pid_error_is_big goto big_error;
+
+    location big_error:
+        edge ccs_turning_off goto idle;
+        edge pid_error_is_small goto small_error;
+
+end
+
+//requirement pid.small_error, pid.big_error needs ccs.on;
+requirement not (ccs.off and (pid.small_error or pid.big_error));
+requirement not (ccs.on and pid.idle);

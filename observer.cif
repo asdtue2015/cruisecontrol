@@ -1,0 +1,17 @@
+import "car.cif";
+
+uncontrollable slowing_towards_zero, speeding_to_30, speeding_towards_250, slowing_towards_25;
+
+automaton vehicle_speed:
+    location lower_than_25:
+        initial; marked;
+        edge speeding_to_30 when car.v >= 25/3.6 goto between_25_and_30;
+
+    location between_25_and_30:
+        edge slowing_towards_zero when car.v < 25/3.6 goto lower_than_25;
+        edge speeding_towards_250 when car.v >= 30/3.6 goto higher_than_30;
+
+    location higher_than_30:
+        edge slowing_towards_25 when car.v < 30/3.6 goto between_25_and_30;
+
+end
