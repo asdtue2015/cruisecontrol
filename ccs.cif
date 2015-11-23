@@ -31,5 +31,6 @@ location off:
 
 svgin id "tsplus" event u_tsplus;
 svgin id "tsminus" event u_tsminus;
+svgout id "ts" text value fmt("TargetS: %.2f", ts);
 svgin id "ccbutton" event u_ccpushed;
 end
