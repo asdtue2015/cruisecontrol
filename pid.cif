@@ -50,4 +50,5 @@ automaton def pid(alg real Kpc; alg real ARW_limit):
        edge when error < -ARW_limit, t>0.1 do PID_Integrator := 0.0, t:=0 goto big_error;
 
 
+    svgout id "err" text value fmt("Error: %.2f", error*3.6);
 end
