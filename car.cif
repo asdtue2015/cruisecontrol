@@ -19,7 +19,6 @@ import "ccs.cif";
 
 
 
-
 automaton car:
 
     cont x = 0.0;         // position on the road
