@@ -3,8 +3,8 @@ import "car.cif";
 import "gobutton.cif";
 svgfile "car.svg";
 //automaton def ccs (event u_tsplus; event u_tsminus):
-uncontrollable u_tsplus,u_tsminus;
-event u_ccpushed;
+uncontrollable u_tsplus,u_tsminus, u_ccpushed;
+//event u_ccpushed;
 
 automaton ccs:
 
@@ -12,7 +12,7 @@ cont ts= 50;
 equation ts'=0;
 cont state=0;
 equation state'=0;
-monitor u_tsplus,u_tsminus;
+monitor u_tsplus,u_tsminus,u_pedthrottleplus,u_brake,u_pedthrottleminus;
 
 
 location on:
