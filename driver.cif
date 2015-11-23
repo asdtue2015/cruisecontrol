@@ -1,5 +1,5 @@
 svgfile "car.svg";
-
+import "ccs.cif";
 
 
 uncontrollable u_pedthrottleplus,u_pedthrottleminus,u_brake;
@@ -17,7 +17,7 @@ automaton driver:
     initial;
     edge u_pedthrottleplus do pthrottle:=  if pthrottle < 1 : pthrottle+0.2 else pthrottle end,breaking:= 0;
     edge u_pedthrottleminus  do pthrottle:= if pthrottle > 0.1 : pthrottle-0.2 else pthrottle end,breaking:= 0;
-
+    edge u_ccpushed do pthrottle:=0;
     edge u_brake do breaking:= 1,pthrottle:= 0;
 
 
@@ -26,6 +26,5 @@ automaton driver:
     svgin id "brake" event u_brake;
 
     svgout id "throttle" text value fmt("Pedal throttle: %.2f", pthrottle);
-
 end
 

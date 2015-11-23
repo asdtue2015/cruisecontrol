@@ -35,4 +35,9 @@ svgin id "tsplus" event u_tsplus;
 svgin id "tsminus" event u_tsminus;
 svgout id "ts" text value fmt("TargetS: %.2f", ts);
 svgin id "ccbutton" event u_ccpushed;
+svgout id "ccbutton" attr "fill" value
+    if on : "green"
+    elif off and car.v >= 30/3.6 : "blue"
+    else "silver"
+    end;
 end
