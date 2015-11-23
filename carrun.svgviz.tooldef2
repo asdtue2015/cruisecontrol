@@ -9,8 +9,8 @@ cif3sim(
     "--frame-rate=50",
     "--speed=2.0",
     "--option-dialog=no",
-    "--plotviz=1",
+    "--plotviz=0",
     "--plotviz-range=inf",
-    "--plotviz-filter=pid_speed.error,pid_speed.output,pid_speed.reaction,pid_speed.proportional,car.v",
+    "--plotviz-filter=driver.pthrottle",
     "--plotviz-mode=postponed",
 );

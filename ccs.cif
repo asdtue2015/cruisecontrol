@@ -28,7 +28,8 @@ location on:
 location off:
     initial;
     edge u_ccpushed when car.v*3.6 >30 do state:= true goto on;
-
+    edge  u_tsplus do ts:=ts+5;                //set target speed before enabling it
+    edge  u_tsminus do ts:=ts-5;
 
 svgin id "tsplus" event u_tsplus;
 svgin id "tsminus" event u_tsminus;

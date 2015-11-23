@@ -16,7 +16,7 @@ automaton driver:
     location drive:
     initial;
     edge u_pedthrottleplus do pthrottle:=  if pthrottle < 1 : pthrottle+0.2 else pthrottle end,breaking:= 0;
-    edge u_pedthrottleminus  do pthrottle:= if pthrottle > 0 : pthrottle-0.2 else pthrottle end,breaking:= 0;
+    edge u_pedthrottleminus  do pthrottle:= if pthrottle > 0.1 : pthrottle-0.2 else pthrottle end,breaking:= 0;
 
     edge u_brake do breaking:= 1,pthrottle:= 0;
 
