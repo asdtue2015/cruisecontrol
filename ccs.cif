@@ -13,7 +13,7 @@ cont ts= 50;
 equation ts'=0;
 
 disc bool state = false;
-monitor u_tsplus, u_tsminus, u_pedthrottleplus, u_brake, u_pedthrottleminus;
+monitor u_tsplus, u_tsminus, u_pedthrottleplus, u_brake, u_pedthrottleminus, u_ccpushed;
 
 
 
