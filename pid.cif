@@ -16,7 +16,7 @@ automaton def pid(alg real Kpc; alg real ARW_limit):
 
     alg bool CCS_state = ccs.state;
     alg real V_Target = ccs.ts;
-    input real V_Measure;
+    alg real V_Measure = car.v;
 
 
     alg real error = V_Target - V_Measure;

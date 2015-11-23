@@ -1,6 +1,7 @@
 
 import "car.cif";
 import "gobutton.cif";
+import "driver.cif";
 svgfile "car.svg";
 //automaton def ccs (event u_tsplus; event u_tsminus):
 uncontrollable u_tsplus,u_tsminus, u_ccpushed;

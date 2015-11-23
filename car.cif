@@ -9,12 +9,11 @@ const real friction_sq = 3;       // friction quadratic to speed (N / (m/s)^2)
 const real Fmotor = 10000;          // motor's max force at full throttle
 const real BreakF=3000;
 
-const real rthrottle=0;
-
 
 import "gobutton.cif";
 import "driver.cif";
 import "ccs.cif";
+import "model.cif";
 
 
 automaton car:
@@ -39,7 +38,7 @@ automaton car:
     location on:
 
 
-        equation v' = if driver.breaking=0:  (1 / mass) * ( Fmotor*(driver.pthrottle+rthrottle) - Fr )
+        equation v' = if driver.breaking=0:  (1 / mass) * ( Fmotor*(driver.pthrottle+pid_speed.output) - Fr )
                     elif driver.breaking=1 and v>0: -BreakF/mass
                     else 0
                     end;

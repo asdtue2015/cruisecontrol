@@ -7,10 +7,9 @@ uncontrollable u_pedthrottleplus,u_pedthrottleminus,u_brake;
 
 
 automaton driver:
-    cont pthrottle=0.0;
+    disc real pthrottle=0.0;
     cont breaking = 0;
 
-    equation pthrottle'=0;
 
     equation breaking'=0;
 
