@@ -25,5 +25,7 @@ automaton driver:
     svgin id "pedtminus" event u_pedthrottleminus;
     svgin id "brake" event u_brake;
 
+    svgout id "throttle" text value fmt("Pedal throttle: %.2f", pthrottle);
+
 end
 
